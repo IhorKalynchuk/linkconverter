@@ -1,0 +1,23 @@
+
+logging:
+  config: classpath:logback-spring.xml
+
+app:
+  name: Tech Interface - Swagger and Profiles Tutorial
+
+server:
+  port: 8081
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    username: root
+    password: root
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/trendyol_db
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
