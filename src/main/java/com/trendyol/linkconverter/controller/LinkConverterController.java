@@ -1,6 +1,6 @@
 package com.trendyol.linkconverter.controller;
 
-import com.trendyol.linkconverter.dto.DeepLinkDto;
+import com.trendyol.linkconverter.dto.DeeplinkDto;
 import com.trendyol.linkconverter.dto.WebUrlDto;
 import com.trendyol.linkconverter.service.LinkConverterService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -30,29 +30,29 @@ public class LinkConverterController {
   private static final Logger LOGGER = LoggerFactory.getLogger(LinkConverterController.class);
   private final LinkConverterService linkConverterService;
 
-  @PostMapping(path = "/toDeepLink", produces = {MediaType.APPLICATION_JSON_VALUE})
-  @Operation(summary = "Convert Web URL do DeepLink", responses = {
+  @PostMapping(path = "/toDeeplink", produces = {MediaType.APPLICATION_JSON_VALUE})
+  @Operation(summary = "Convert Web URL do Deeplink", responses = {
       @io.swagger.v3.oas.annotations.responses.ApiResponse(description = " success", responseCode = "200",
-          content = @Content(mediaType = "application/json", schema = @Schema(implementation = DeepLinkDto.class))),
+          content = @Content(mediaType = "application/json", schema = @Schema(implementation = DeeplinkDto.class))),
       @ApiResponse(description = "Bad request", responseCode = "400", content = @Content)
   })
   @ResponseBody
-  public DeepLinkDto toDeepLink(@RequestBody @Valid WebUrlDto webUrl) {
-    String deepLink = linkConverterService.toDeepLink(webUrl.getWebUrl());
-    LOGGER.info("Successfully converted webUrl '{}' to deepLink '{}'", webUrl, deepLink);
-    return new DeepLinkDto(deepLink);
+  public DeeplinkDto toDeeplink(@RequestBody @Valid WebUrlDto webUrl) {
+    String deeplink = linkConverterService.toDeeplink(webUrl.getWebUrl());
+    LOGGER.info("Successfully converted webUrl '{}' to deeplink '{}'", webUrl, deeplink);
+    return new DeeplinkDto(deeplink);
   }
 
   @PostMapping(path = "/toWebUrl", produces = {MediaType.APPLICATION_JSON_VALUE})
-  @Operation(summary = "Convert DeepLink do Web URL", responses = {
+  @Operation(summary = "Convert Deeplink do Web URL", responses = {
       @io.swagger.v3.oas.annotations.responses.ApiResponse(description = " success", responseCode = "200",
           content = @Content(mediaType = "application/json", schema = @Schema(implementation = WebUrlDto.class))),
       @ApiResponse(description = "Bad request", responseCode = "400", content = @Content)
   })
   @ResponseBody
-  public WebUrlDto toWebUrl(@RequestBody @Valid DeepLinkDto deepLink) {
-    String webUrl = linkConverterService.toWebUrl(deepLink.getDeepLink());
-    LOGGER.info("Successfully converted deepLink '{}' to webUrl '{}'", deepLink, webUrl);
+  public WebUrlDto toWebUrl(@RequestBody @Valid DeeplinkDto deeplink) {
+    String webUrl = linkConverterService.toWebUrl(deeplink.getDeeplink());
+    LOGGER.info("Successfully converted deeplink '{}' to webUrl '{}'", deeplink, webUrl);
     return new WebUrlDto(webUrl);
   }
 

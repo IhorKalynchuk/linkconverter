@@ -1,6 +1,6 @@
 package com.trendyol.linkconverter.service;
 
 public interface LinkConverterService {
-  String toDeepLink(String webUrl);
-  String toWebUrl(String deepLink);
+  String toDeeplink(String webUrl);
+  String toWebUrl(String deeplink);
 }

@@ -1,6 +1,6 @@
 package com.trendyol.linkconverter.controller;
 
-import com.trendyol.linkconverter.dto.DeepLinkDto;
+import com.trendyol.linkconverter.dto.DeeplinkDto;
 import com.trendyol.linkconverter.dto.WebUrlDto;
 import com.trendyol.linkconverter.service.LinkConverterService;
 import com.trendyol.linkconverter.util.TestJsonResource;
@@ -41,20 +41,20 @@ class LinkConverterControllerTest {
   }
 
   @Test
-  void shouldConvertToDeepLink() throws Exception {
-    when(linkConverterService.toDeepLink(anyString())).thenReturn("DeepLinkStub");
-    sut.perform(post("/api/link/toDeepLink")
-            .content(TestJsonResource.getJson(new WebUrlDto("someUrl")))
+  void shouldConvertToDeeplink() throws Exception {
+    when(linkConverterService.toDeeplink(anyString())).thenReturn("DeeplinkStub");
+    sut.perform(post("/api/link/toDeeplink")
+            .content(TestJsonResource.getJson(new WebUrlDto("https://www.trendyol.com/Hesabim/#/Siparisierim")))
             .contentType(MediaType.APPLICATION_JSON_VALUE)
         )
         .andExpect(status().isOk())
         .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
-        .andExpect(content().string("{\"deepLink\":\"DeepLinkStub\"}"));
+        .andExpect(content().string("{\"deeplink\":\"DeeplinkStub\"}"));
   }
 
   @Test
   void shouldFailWhenWebUrlIsEmpty() throws Exception {
-    sut.perform(post("/api/link/toDeepLink")
+    sut.perform(post("/api/link/toDeeplink")
             .content(TestJsonResource.getJson(new WebUrlDto("")))
             .contentType(MediaType.APPLICATION_JSON_VALUE)
         )
@@ -65,7 +65,7 @@ class LinkConverterControllerTest {
   void shouldConvertWebUrl() throws Exception {
     when(linkConverterService.toWebUrl(anyString())).thenReturn("WebUrlStub");
     sut.perform(post("/api/link/toWebUrl")
-            .content(TestJsonResource.getJson(new DeepLinkDto("someDeepLink")))
+            .content(TestJsonResource.getJson(new DeeplinkDto("ty://?Page=Home")))
             .contentType(MediaType.APPLICATION_JSON_VALUE)
         )
         .andExpect(status().isOk())
@@ -74,9 +74,9 @@ class LinkConverterControllerTest {
   }
 
   @Test
-  void shouldFailWhenDeepLinkIsEmpty() throws Exception {
+  void shouldFailWhenDeeplinkIsEmpty() throws Exception {
     sut.perform(post("/api/link/toWebUrl")
-            .content(TestJsonResource.getJson(new DeepLinkDto("")))
+            .content(TestJsonResource.getJson(new DeeplinkDto("")))
             .contentType(MediaType.APPLICATION_JSON_VALUE)
         )
         .andExpect(status().is(400));
