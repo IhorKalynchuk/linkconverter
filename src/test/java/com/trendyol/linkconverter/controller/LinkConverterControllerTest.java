@@ -42,7 +42,7 @@ class LinkConverterControllerTest {
 
   @Test
   void shouldConvertToDeeplink() throws Exception {
-    when(linkConverterService.toDeeplink(anyString())).thenReturn("DeeplinkStub");
+    when(linkConverterService.convertToDeeplink(anyString())).thenReturn("DeeplinkStub");
     sut.perform(post("/api/link/toDeeplink")
             .content(TestJsonResource.getJson(new WebUrlDto("https://www.trendyol.com/Hesabim/#/Siparisierim")))
             .contentType(MediaType.APPLICATION_JSON_VALUE)
@@ -63,7 +63,7 @@ class LinkConverterControllerTest {
 
   @Test
   void shouldConvertWebUrl() throws Exception {
-    when(linkConverterService.toWebUrl(anyString())).thenReturn("WebUrlStub");
+    when(linkConverterService.convertToWebUrl("ty://?Page=Home")).thenReturn("WebUrlStub");
     sut.perform(post("/api/link/toWebUrl")
             .content(TestJsonResource.getJson(new DeeplinkDto("ty://?Page=Home")))
             .contentType(MediaType.APPLICATION_JSON_VALUE)

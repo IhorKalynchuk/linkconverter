@@ -12,6 +12,7 @@ import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -28,6 +29,7 @@ import javax.validation.Valid;
 @Slf4j
 public class LinkConverterController {
   private static final Logger LOGGER = LoggerFactory.getLogger(LinkConverterController.class);
+  @Autowired
   private final LinkConverterService linkConverterService;
 
   @PostMapping(path = "/toDeeplink", produces = {MediaType.APPLICATION_JSON_VALUE})
@@ -38,7 +40,7 @@ public class LinkConverterController {
   })
   @ResponseBody
   public DeeplinkDto toDeeplink(@RequestBody @Valid WebUrlDto webUrl) {
-    String deeplink = linkConverterService.toDeeplink(webUrl.getWebUrl());
+    String deeplink = linkConverterService.convertToDeeplink(webUrl.getWebUrl());
     LOGGER.info("Successfully converted webUrl '{}' to deeplink '{}'", webUrl, deeplink);
     return new DeeplinkDto(deeplink);
   }
@@ -51,7 +53,7 @@ public class LinkConverterController {
   })
   @ResponseBody
   public WebUrlDto toWebUrl(@RequestBody @Valid DeeplinkDto deeplink) {
-    String webUrl = linkConverterService.toWebUrl(deeplink.getDeeplink());
+    String webUrl = linkConverterService.convertToWebUrl(deeplink.getDeeplink());
     LOGGER.info("Successfully converted deeplink '{}' to webUrl '{}'", deeplink, webUrl);
     return new WebUrlDto(webUrl);
   }

@@ -3,13 +3,22 @@ package com.trendyol.linkconverter.converter;
 import java.util.function.Predicate;
 
 public interface LinkConverter {
-  String DEEP_LINK_HOME_PAGE = "ty://?Page=Home";
+  String WEB_URL_DEFAULT_PAGE = "http://www.trendyol.com";
+  String DEEP_LINK_DEFAULT_PAGE = "ty://?Page=Home";
 
   String convertToDeeplink(String webUrl);
 
-  Predicate<String> getWebUrlRule();
+  String convertToWebUrl(String deeplink);
 
-  static String getDefaultDeeplinkPage() {
-    return DEEP_LINK_HOME_PAGE;
+  Predicate<String> isWebUrl();
+
+  Predicate<String> isDeeplink();
+
+  static String getDefaultDeeplink() {
+    return DEEP_LINK_DEFAULT_PAGE;
+  }
+
+  static String getDefaultWebUrl() {
+    return WEB_URL_DEFAULT_PAGE;
   }
 }
