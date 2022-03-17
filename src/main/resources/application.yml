@@ -17,17 +17,8 @@ server:
 
 spring:
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    username: root
-    password: root
-    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/trendyol_db
-  sql:
-    init:
-      mode: always
-  jpa:
-    defer-datasource-initialization: true
-    hibernate:
-      ddl-auto: update
-  mvc:
-    pathmatch:
-      matching-strategy: ant_path_matcher
+    url: jdbc:postgresql://localhost:5432/postgres
+    driverClassName: org.postgresql.Driver
+    platform: postgres
+    username: postgres
+    password: password

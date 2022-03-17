@@ -11,7 +11,7 @@
 	<groupId>com.trendyol</groupId>
 	<artifactId>linkconverter</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>link-converter</name>
+	<name>linkconverter</name>
 	<description>Link Converter between mobile and web applications</description>
 	<properties>
 		<java.version>11</java.version>
@@ -27,8 +27,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
+			<groupId>org.postgresql</groupId>
+			<artifactId>postgresql</artifactId>
 			<scope>runtime</scope>
 		</dependency>
 		<dependency>
@@ -59,18 +59,11 @@
 	</dependencies>
 
 	<build>
+		<finalName>linkconverter</finalName>
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<excludes>
-						<exclude>
-							<groupId>org.projectlombok</groupId>
-							<artifactId>lombok</artifactId>
-						</exclude>
-					</excludes>
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
